@@ -10,6 +10,7 @@ from models.task import Task
 from routes.auth import auth_bp
 from routes.tasks import tasks_bp
 from routes.admin import admin_bp
+from utils.extensions import cache, limiter, init_extensions
 
 def create_app(config_name=None):
     """
@@ -32,6 +33,7 @@ def create_app(config_name=None):
     
     # Initialize extensions
     db.init_app(app)
+    init_extensions(app)
     CORS(app, origins=app.config['ALLOWED_ORIGINS'])
     
     # Register blueprints

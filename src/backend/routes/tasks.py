@@ -4,6 +4,7 @@ Handles task CRUD endpoints.
 """
 from flask import Blueprint, request, jsonify, g
 from middleware.auth import require_auth
+from utils.extensions import cache, limiter
 from services.task_service import (
     create_task, get_user_tasks, get_task_by_id,
     update_task, delete_task
@@ -42,6 +43,9 @@ def create():
     if error:
         return jsonify({'error': error}), 400
     
+    # Invalidate cache for task list
+    cache.delete_memoized(list_tasks)
+    
     return jsonify({
         'message': 'Task created successfully',
         'task': task.to_dict()
@@ -49,6 +53,7 @@ def create():
 
 @tasks_bp.route('', methods=['GET'])
 @require_auth
+@cache.memoize(timeout=60)
 def list_tasks():
     """
     List all tasks for authenticated user with pagination.
@@ -119,6 +124,9 @@ def update(task_id):
             return jsonify({'error': error}), 404
         return jsonify({'error': error}), 400
     
+    # Invalidate cache for task list
+    cache.delete_memoized(list_tasks)
+    
     return jsonify({
         'message': 'Task updated successfully',
         'task': task.to_dict()
@@ -138,5 +146,8 @@ def delete(task_id):
     
     if error:
         return jsonify({'error': error}), 404
+    
+    # Invalidate cache for task list
+    cache.delete_memoized(list_tasks)
     
     return jsonify({'message': 'Task deleted successfully'}), 200
