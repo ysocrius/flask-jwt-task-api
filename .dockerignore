@@ -1,0 +1,17 @@
+venv/
+__pycache__/
+*.pyc
+.env
+.git
+.gitignore
+.pytest_cache/
+.coverage
+htmlcov/
+tests/
+screenshots/
+docs/
+*.png
+master_setup.md
+QUICKSTART.md
+README.md
+SCALABILITY_NOTE.md
