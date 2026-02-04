@@ -1,0 +1,65 @@
+# Environment files (CRITICAL - contains secrets)
+.env
+.env.local
+.env.production
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+ENV/
+env/
+.venv
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+*.cover
+
+# Project-specific exclusions (internal use only)
+docs/INTERVIEW_QA.md
+docs/VIDEO_SCRIPT.md
+plans/
+rules/
+proj_details/
+master_setup.md
+
+# Build artifacts
+dist/
+build/
+*.egg-info/
+
+# Logs
+*.log
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Frontend (if using Node.js)
+node_modules/
+.next/
+out/
+dist/
+
+# Demo artifacts (include if needed for submission)
+# demo/
+# *.png
+# *.mp4
