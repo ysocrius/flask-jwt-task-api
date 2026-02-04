@@ -12,8 +12,8 @@ jobs:
 
     env:
       FLASK_ENV: testing
-      PYTHONPATH: ${{ github.workspace }}/src/backend
-      DATABASE_URL: sqlite:///:memory:
+      PYTHONPATH: "${{ github.workspace }}/src/backend"
+      DATABASE_URL: "sqlite:///:memory:"
       JWT_SECRET_KEY: test-jwt-secret-key-12345
       SECRET_KEY: test-flask-secret-key-12345
       REDIS_URL: redis://localhost:6379/0
