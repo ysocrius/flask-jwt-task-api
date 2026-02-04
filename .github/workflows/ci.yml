@@ -12,10 +12,18 @@ jobs:
 
     env:
       FLASK_ENV: testing
-      PYTHONPATH: src/backend
+      PYTHONPATH: ${{ github.workspace }}/src/backend
       DATABASE_URL: sqlite:///:memory:
       JWT_SECRET_KEY: test-jwt-secret-key-12345
       SECRET_KEY: test-flask-secret-key-12345
+      REDIS_URL: redis://localhost:6379/0
+
+    services:
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
+        options: --health-cmd "redis-cli ping" --health-interval 10s --health-timeout 5s --health-retries 5
 
     steps:
       - name: Checkout code
@@ -33,6 +41,12 @@ jobs:
         run: |
           pip install -r requirements.txt
 
+      - name: Debug environment
+        run: |
+          echo "Current working directory: $(pwd)"
+          echo "PYTHONPATH: $PYTHONPATH"
+          ls -R src/backend
+          
       - name: Run tests
         run: |
-          pytest -v tests/
+          python -m pytest -v tests/
