@@ -46,6 +46,8 @@ def create():
     # Invalidate cache for task list
     cache.delete_memoized(list_tasks)
     
+    current_app.logger.info(f"Task created: ID {task.id} by User {g.user_id}")
+    
     return jsonify({
         'message': 'Task created successfully',
         'task': task.to_dict()
@@ -149,5 +151,7 @@ def delete(task_id):
     
     # Invalidate cache for task list
     cache.delete_memoized(list_tasks)
+    
+    current_app.logger.info(f"Task deleted: ID {task_id} by User {g.user_id}")
     
     return jsonify({'message': 'Task deleted successfully'}), 200

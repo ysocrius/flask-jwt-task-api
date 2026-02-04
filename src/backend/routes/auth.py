@@ -39,6 +39,8 @@ def register():
     if error:
         return jsonify({'error': error}), 400
     
+    current_app.logger.info(f"New user registered: {email}")
+    
     return jsonify({
         'message': 'User registered successfully',
         'user': user.to_dict()
@@ -73,7 +75,10 @@ def login():
     user, error = login_user(email, password)
     
     if error:
+        current_app.logger.warning(f"Failed login attempt for email: {email}")
         return jsonify({'error': error}), 401
+    
+    current_app.logger.info(f"User login successful: {email}")
     
     # Generate JWT token
     token = create_access_token(

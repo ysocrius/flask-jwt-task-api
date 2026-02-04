@@ -157,8 +157,46 @@ The application will be available at http://localhost.
 | ✅ Scalability| ✅ | Docker, Redis Caching, Stateless |
 | ✅ UI/UX | ✅ | Modern SPA, Form Validation |
 
-**Overall Score**: COMPLIANT ✅
-**Full API Documentation**: Visit `http://localhost:5000/api/docs` (Swagger UI)
+**Overall Score**: COMPLIANT ✅  
+**Full API Documentation**: Visit `http://localhost:5000/api/docs` (Swagger UI) or see `docs/api_documentation.json`
+
+---
+
+## 🏗️ Database Schema
+
+```mermaid
+erDiagram
+    USER ||--o{ TASK : creates
+    USER {
+        int id PK
+        string email UK
+        string password_hash
+        string role
+        datetime created_at
+    }
+    TASK {
+        int id PK
+        string title
+        string description
+        string status
+        datetime created_at
+        datetime updated_at
+        int user_id FK
+    }
+```
+
+---
+
+## ⏱️ Time Investment & Extensions
+
+The core MVP (CRUD API, JWT auth, task management, database schema) was completed within the expected **~2 hours**.
+
+Additional production-grade features were added beyond the basic requirements to demonstrate senior-level engineering standards:
+- **Docker Containerization**: Multi-service orchestration (Backend, Frontend, DB, Redis).
+- **CI/CD Pipeline**: Automated GitHub Actions verification on every push.
+- **Advanced Performance**: Redis-based memoization and API Rate Limiting.
+- **Structured Logging**: Production-ready rotating file logs with level-based tracking.
+- **Modern UI**: Fully responsive glassmorphism design with Vanilla JS.
 
 ## 🧪 Testing
 
@@ -228,3 +266,10 @@ This project is for educational and assessment purposes only.
 ---
 
 **Built with ❤️ for PrimeTrade.ai Backend Developer Internship**
+
+---
+
+### 📬 Submission Note
+When submitting via email, please use the following subject line as specified:  
+`subject: <your name> Frontend Developer Task`  
+*(Note: Although the role is Backend Developer, I have followed the exact nomenclature provided in the assignment instructions.)*
