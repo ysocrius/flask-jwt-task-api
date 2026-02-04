@@ -85,3 +85,37 @@ def test_user_login_invalid_credentials(client):
     assert response.status_code == 401
     data = response.get_json()
     assert "invalid" in data.get("error").lower()
+    
+def test_task_crud_lifecycle(client):
+    """Test full lifecycle of a task: Create, Read, Update, Delete."""
+    # 1. Login to get token
+    payload = {"email": "task_tester@example.com", "password": "TaskPass123!"}
+    client.post("/api/v1/auth/register", json=payload)
+    login_resp = client.post("/api/v1/auth/login", json=payload)
+    token = login_resp.get_json()["token"]
+    headers = {"Authorization": f"Bearer {token}"}
+
+    # 2. Create Task
+    task_payload = {"title": "Test Task", "description": "This is a test"}
+    create_resp = client.post("/api/v1/tasks", json=task_payload, headers=headers)
+    assert create_resp.status_code == 201
+    task_id = create_resp.get_json()["task"]["id"]
+
+    # 3. List Tasks
+    list_resp = client.get("/api/v1/tasks", headers=headers)
+    assert list_resp.status_code == 200
+    assert len(list_resp.get_json()["tasks"]) >= 1
+
+    # 4. Update Task
+    update_payload = {"status": "completed"}
+    update_resp = client.put(f"/api/v1/tasks/{task_id}", json=update_payload, headers=headers)
+    assert update_resp.status_code == 200
+    assert update_resp.get_json()["task"]["status"] == "completed"
+
+    # 5. Delete Task
+    delete_resp = client.delete(f"/api/v1/tasks/{task_id}", headers=headers)
+    assert delete_resp.status_code == 200
+
+    # 6. Verify Deletion
+    get_resp = client.get(f"/api/v1/tasks/{task_id}", headers=headers)
+    assert get_resp.status_code == 404

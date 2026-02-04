@@ -2,7 +2,7 @@
 Task routes.
 Handles task CRUD endpoints.
 """
-from flask import Blueprint, request, jsonify, g
+from flask import Blueprint, request, jsonify, g, current_app
 from middleware.auth import require_auth
 from utils.extensions import cache, limiter
 from services.task_service import (
