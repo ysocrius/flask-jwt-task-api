@@ -157,22 +157,24 @@ src/
 - ✅ Scalability strategies documented (SCALABILITY_NOTE.md)
 
 **Test Results**:
-- Total tests: 7
-- Passed: 7 (100%)
-- Automated CI: ✅ PASS (Ubuntu-latest, Python 3.10)
+- Total tests: 8
+- Passed: 8 (100%)
+- Automated CI: ✅ PASS (Ubuntu-latest, Python 3.10, Redis service)
 
 **Challenges**:
 - Testing with in-memory SQLite and factory pattern
 - **Solution**: Developed `tests/conftest.py` with app factory injection and PYTHONPATH configuration
 
-### Phase 6: Deployment
+### Phase 6: Deployment & Containerization
 **Status**: ✅ Complete
 **Completed**: 2026-02-05
 
 **Key Accomplishments**:
-- ✅ **GitHub Repository pushed** with full configuration
-- ✅ **CI/CD Pipeline** automates verification on every push
-- ✅ Comprehensive documentation (README, QUICKSTART, SCALABILITY)
+- ✅ **Dockerized Environment**: Multi-service setup (Gunicorn, Nginx, PostgreSQL, Redis)
+- ✅ **Redis Caching**: Implemented memoization for task list endpoint (60s TTL)
+- ✅ **API Rate Limiting**: Implemented with Redis backend (200/day, 50/hour)
+- ✅ **Structured Logging**: Production rotating file logs in `logs/app_execution.log`
+- ✅ **CI/CD Pipeline**: Automates verification on every push with live Redis service
 - ✅ Technical Video Script for recruiter walkthrough
 - ✅ Final compliance report verifying 100% adherence to requirements
 
@@ -210,10 +212,9 @@ src/
 
 ## Future Improvements
 1. Implement refresh tokens for better UX
-2. Add Redis caching for frequently accessed data
-3. Implement rate limiting
-4. Add email verification
-5. Implement password reset functionality
+2. Add Websockets for real-time task updates
+3. Implement password reset functionality
+4. Add comprehensive E2E frontend testing (Playwright)
 
 ---
 

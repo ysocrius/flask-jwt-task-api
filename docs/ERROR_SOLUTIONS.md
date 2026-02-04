@@ -243,5 +243,41 @@ Could have used `python-dotenv`'s `load_dotenv(override=True)` in a signal handl
 
 ---
 
+## Error #6: NameError: name 'current_app' is not defined
+
+**Date**: 2026-02-05
+**Phase**: Testing / CI
+**Severity**: High
+
+**Error Message**:
+```
+NameError: name 'current_app' is not defined
+```
+
+**Context**:
+Encountered during automated CI testing on GitHub Actions after implementing structured logging in `src/backend/routes/tasks.py`.
+
+**Root Cause**:
+The `current_app` proxy was used to access the logger in `tasks.py`, but it was not imported from `flask`. This worked in dev because that specific code path (task creation/deletion) wasn't hit during the first local test run, but CI's comprehensive test suite caught it immediately.
+
+**Solution**:
+Added `current_app` to the Flask imports in `src/backend/routes/tasks.py`:
+```python
+# Before
+from flask import Blueprint, request, jsonify, g
+
+# After
+from flask import Blueprint, request, jsonify, g, current_app
+```
+
+**Prevention**:
+- Always run the full test suite locally before pushing to CI.
+- Use a linter (Pylint/Flake8) to catch undefined names automatically.
+
+**Learning**:
+Even minor changes (like adding a log line) can break a module if imports are missing. Comprehensive automated testing is the only reliable way to catch these regressions early.
+
+---
+
 **Last Updated**: 2026-02-05
-**Total Errors Logged**: 5
+**Total Errors Logged**: 6
