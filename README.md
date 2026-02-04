@@ -13,6 +13,8 @@ A scalable REST API with JWT authentication and role-based access control, built
 - ✅ Comprehensive error handling
 - ✅ API documentation (Swagger/Postman)
 - ✅ Responsive frontend UI
+- ✅ **Dockerized Environment** (PostgreSQL, Gunicorn, Nginx)
+- ✅ **GitHub Actions CI/CD Pipeline**
 - ✅ PostgreSQL database with SQLAlchemy ORM
 
 ## 🛠️ Tech Stack
@@ -100,6 +102,14 @@ npm run dev
 ### Default Credentials
 - **Admin**: `admin@primetrade.ai` / `Admin123!`
 - **Test User**: Register a new account at http://localhost:8080
+
+### Option 2: Docker (Recommended)
+You only need Docker and Docker Compose installed.
+
+```bash
+docker compose up --build
+```
+The application will be available at http://localhost.
 
 ---
 

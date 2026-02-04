@@ -8,6 +8,14 @@ Get the PrimeTrade Backend API running in **5 minutes**.
 
 ## Setup
 
+### Option 1: Docker (Fastest)
+1. **Run with one command**:
+   ```bash
+   docker compose up --build
+   ```
+2. **Access the app**: http://localhost
+
+### Option 2: Local Installation
 ### 1. Clone & Navigate
 ```bash
 git clone <repository-url>
