@@ -251,9 +251,9 @@ See `docs/SCALABILITY_NOTE.md` for detailed scaling strategies including:
 
 ## 📝 Documentation
 
-- `docs/PROJECT_REPORT.md` - Detailed project report
-- `docs/ERROR_SOLUTIONS.md` - Debugging insights
-- `docs/SCALABILITY_NOTE.md` - Scaling strategies
+- [`docs/PROJECT_REPORT.md`](docs/PROJECT_REPORT.md) - Detailed project report
+- [`docs/ERROR_SOLUTIONS.md`](docs/ERROR_SOLUTIONS.md) - Debugging insights
+- [`docs/SCALABILITY_NOTE.md`](docs/SCALABILITY_NOTE.md) - Scaling strategies
 
 ## 🤝 Contributing
 
@@ -266,10 +266,3 @@ This project is for educational and assessment purposes only.
 ---
 
 **Built with ❤️ for PrimeTrade.ai Backend Developer Internship**
-
----
-
-### 📬 Submission Note
-When submitting via email, please use the following subject line as specified:  
-`subject: <your name> Frontend Developer Task`  
-*(Note: Although the role is Backend Developer, I have followed the exact nomenclature provided in the assignment instructions.)*
